@@ -1,0 +1,5 @@
+"1","Jour","1","Jour"
+"2","Demi jour","1","Jour"
+"3","Nuit eclairee","2","Nuit"
+"4","Nuit eclairee insuffisant","2","Nuit"
+"5","Nuit sans eclairage","2","Nuit"
