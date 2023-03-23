@@ -1,3 +1,4 @@
+
 # -*- coding: utf-8 -*-
 """
 Created on Tue Apr 12 09:17:16 2022
@@ -10,7 +11,7 @@ import pyodbc
 import pandas as pd
 from pyproj import Proj, transform
 
-conn=pyodbc.connect('DSN=BD_Nodenot_Lakartxela')
+conn=pyodbc.connect('DSN=nodenot_bd4')
 cursor = conn.cursor()
 
 

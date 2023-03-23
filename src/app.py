@@ -3,6 +3,9 @@
 
 #Created on Wed May 11 00:16:49 2022
 
+#pip install geopy
+#pip install pyproj
+#pip install pyodbc
 
 
 #Application Indicateur de risque
@@ -29,15 +32,17 @@ import webbrowser
 from pyproj import Proj, transform
 
 #Importation base de données
-import pyodbc
+#import pyodbc
 import pandas as pd
 import random
 
-
+import pymysql
+conn = pymysql.connect(host="localhost", port=3306, user="root", passwd="root", database="nodenot_bd4")
+cursor = conn.cursor()
 
 #Connexion avec la base de donnée
-conn=pyodbc.connect('DSN=BD_ACCIDENT')
-cursor = conn.cursor()
+#conn=pyodbc.connect('DSN=BD_ACCIDENT')
+#cursor = conn.cursor()
 
 #Fonctions :
 
@@ -59,7 +64,7 @@ def lancerCarte(luminosite,meteo,mois):
     
     #Reqête sur la base de données
     sql3="SELECT MLieu.x,MLieu.y,nb_morts*10+nb_blesses_graves*5+nb_blesses_legers AS indice_gravite FROM MAccident JOIN MLieu ON MLieu.lieu_id=MAccident.lieu_id JOIN MLuminosite ON MAccident.lum_id=MLuminosite.code JOIN MIntemperie ON MIntemperie.code=MAccident.intemp_id JOIN MDate ON MDate.date_id=MAccident.date_id WHERE MLuminosite.libelle_luminosite=? AND MIntemperie.libelle=? AND MONTH(MDate.DateFormatStandard)=?;"
-    param = (f'{luminosite}',f'{meteo}',mois)
+    param = (f'{luminosite}',f'{meteo}',f'{mois}')
     #Insertion des données dans le DataFrame
     df2=pd.read_sql(sql3,conn,params=param)
     
